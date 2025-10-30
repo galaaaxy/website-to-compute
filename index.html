@@ -1,56 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <!-- 
-      This is an HTML comment
-      You can write text in a comment and the content won't be visible in the page
-    -->
-
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="https://glitch.com/favicon.ico" />
-
-  <!--
-      This is the page head - it contains info the browser uses
-      Like the title, which appears on the browser tab but not inside the page
-      Further down you'll see the content that displays in the page
-    -->
-  <title>Hello World!</title>
-
-  <!-- The website stylesheet -->
-  <link rel="stylesheet" href="/style.css" />
-
-  <!-- The website JavaScript file -->
-  <script src="/script.js" defer></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Saturn — Launcher</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
-
 <body>
-  <!--
-      The body includes the content you see in the page
-      Each element is defined using tags, like this <div></div>
-      The attributes like class="wrapper" let us style elements in the CSS
-    -->
-  <div class="wrapper">
-    <div class="content" role="main">
-      <h1 class="title">Oh hi website!</h1>
-      <img src="/cool-website.svg" class="illustration" alt="cool website" />
-      <div class="instructions">
-        <p>
-          Fork <a href="https://github.com/glitchdotcom/website-to-compute">this project</a> and open it in a GitHub Codespace.
-        </p>
-        <p> Follow the steps in the README to deploy your new website to Fastly in a few steps!
-        </p>
+  <div class="dots-bg"></div>
 
-      </div>
-
-      <footer class="footer">
-        <div>
-          <a class="remix" href="https://github.com/glitchdotcom/website-to-compute">🚧 Get your own site</a>
+  <header class="topbar">
+    <div class="left">
+      <div class="logo-wrap">
+        <div class="logo">🪐</div>
+        <div class="brand">
+          <div class="name">saturn</div>
+          <div class="ver">v1.0</div>
         </div>
-      </footer>
+      </div>
     </div>
-  </div>
-</body>
 
+    <nav class="topnav">
+      <button class="nav-btn" data-view="apps">Apps</button>
+      <button class="nav-btn active" data-view="games">Games</button>
+      <button class="nav-btn" data-view="settings">Settings</button>
+    </nav>
+  </header>
+
+  <main class="main-area">
+    <section class="hero">
+      <h1 class="hero-logo">saturn</h1>
+
+      <form id="searchForm" class="search" autocomplete="off">
+        <span class="g-icon">🔎</span>
+        <input id="searchInput" placeholder="Search Google or type URL" />
+        <button type="submit" class="search-go">Go</button>
+      </form>
+
+      <div class="shortcuts" id="shortcuts">
+        <!-- shortcut items injected -->
+      </div>
+    </section>
+
+    <section class="content">
+      <aside class="sidebar" id="leftPanel">
+        <div class="panel-title">Launcher</div>
+        <div class="panel-sub">Click a game to play here — no redirects</div>
+        <div class="launcher-grid" id="grid"></div>
+      </aside>
+
+      <section class="viewer" id="viewer">
+        <div class="viewer-top">
+          <h2 id="viewerTitle">Select a game</h2>
+          <div class="viewer-controls">
+            <button id="restartBtn" disabled>Restart</button>
+            <button id="fsBtn" disabled>Fullscreen</button>
+            <button id="closeBtn" disabled>Close</button>
+          </div>
+        </div>
+
+        <div class="play-area" id="playArea">
+          <div id="blank" class="game-wrapper placeholder">Choose a game from the left</div>
+
+          <!-- in-place game containers -->
+          <div id="worm" class="game-wrapper"></div>
+          <div id="brick" class="game-wrapper"></div>
+          <div id="sky" class="game-wrapper"></div>
+
+          <!-- apps panel (Apps view) -->
+          <div id="appsPanel" class="panel-view hidden">
+            <h3>Apps</h3>
+            <p>Simple app shortcuts — add your own.</p>
+          </div>
+
+          <!-- settings panel -->
+          <div id="settingsPanel" class="panel-view hidden">
+            <h3>Settings</h3>
+            <label><input type="checkbox" id="searchGoogle" checked /> Use Google for search</label>
+            <p>When unchecked, the site will search local games/apps instead.</p>
+          </div>
+        </div>
+
+        <footer class="viewer-footer">Built for learning — all games here are original demos.</footer>
+      </section>
+    </section>
+  </main>
+
+  <!-- Phaser (for WormRush) -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+
+  <!-- App logic + games -->
+  <script src="/app.js"></script>
+  <script src="/worm.js"></script>
+  <script src="/brick.js"></script>
+  <script src="/sky.js"></script>
+</body>
 </html>
